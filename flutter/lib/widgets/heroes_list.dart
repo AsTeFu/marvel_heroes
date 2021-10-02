@@ -46,10 +46,9 @@ class _HeroPageViewState extends State<HeroPageView> {
     var backgroundColor =
         Color.lerp(prev.color, curr.color, page - page.truncate());
 
-    return Positioned(
+    return Positioned.fill(
       child: CustomPaint(
         painter: TriangleView(strokeColor: backgroundColor ?? Colors.white),
-        child: Flexible(child: Container()),
       ),
     );
   }
