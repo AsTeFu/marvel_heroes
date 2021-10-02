@@ -1,10 +1,12 @@
 import 'dart:ui';
 
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 
 import 'package:marvel_heroes/pages/heroes.dart';
 
 void main() {
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
   runApp(const MyApp());
 }
 
