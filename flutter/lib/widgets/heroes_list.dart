@@ -3,7 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 import 'package:marvel_heroes/models/heroes_container.dart';
-import 'package:marvel_heroes/widgets/hero_card.dart';
+import 'package:marvel_heroes/widgets/hero/hero_card.dart';
+import 'package:marvel_heroes/widgets/hero/hero_details.dart';
 import 'package:marvel_heroes/widgets/triagnle_view.dart';
 import 'package:marvel_heroes/models/hero.dart' as hero_model;
 
@@ -53,13 +54,23 @@ class _HeroPageViewState extends State<HeroPageView> {
     );
   }
 
+  void _navigateHeroDetailsPage(BuildContext context, hero_model.Hero hero) {
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (BuildContext context) => HeroDetails(hero: hero)));
+  }
+
   Widget _renderHero(BuildContext context, int index) {
     var value = (index.toDouble() - page).abs();
     var hero = heroes[index];
 
-    return Transform.scale(
-        scale: lerpDouble(1, _minScale, value) ?? 0,
-        child: HeroCard(hero: hero));
+    return GestureDetector(
+      onTap: () => _navigateHeroDetailsPage(context, hero),
+      child: Hero(
+          tag: 'hero-$index',
+          child: Transform.scale(
+              scale: lerpDouble(1, _minScale, value) ?? 0,
+              child: HeroCard(hero: hero))),
+    );
   }
 
   @override

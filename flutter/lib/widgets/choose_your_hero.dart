@@ -11,7 +11,11 @@ class ChooseYourHero extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(0, 10, 0, 20),
       child: Text(
         title,
-        style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        style: const TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            decoration: TextDecoration.none),
       ),
     );
   }
