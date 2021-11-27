@@ -54,9 +54,9 @@ class _HeroPageViewState extends State<HeroPageView> {
     );
   }
 
-  void _navigateHeroDetailsPage(BuildContext context, hero_model.Hero hero) {
+  void _navigateHeroDetailsPage(BuildContext context, hero_model.Hero hero, int index) {
     Navigator.of(context).push(MaterialPageRoute(
-        builder: (BuildContext context) => HeroDetails(hero: hero)));
+        builder: (BuildContext context) => HeroDetails(hero: hero, index: index)));
   }
 
   Widget _renderHero(BuildContext context, int index) {
@@ -64,12 +64,14 @@ class _HeroPageViewState extends State<HeroPageView> {
     var hero = heroes[index];
 
     return GestureDetector(
-      onTap: () => _navigateHeroDetailsPage(context, hero),
-      child: Hero(
+      onTap: () => _navigateHeroDetailsPage(context, hero, index),
+      child: Transform.scale(
+        scale: lerpDouble(1, _minScale, value) ?? 0,
+        child: Hero(
           tag: 'hero-$index',
-          child: Transform.scale(
-              scale: lerpDouble(1, _minScale, value) ?? 0,
-              child: HeroCard(hero: hero))),
+          child: HeroCard(hero: hero),
+        ),
+      ),
     );
   }
 
