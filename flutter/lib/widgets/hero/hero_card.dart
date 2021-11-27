@@ -20,7 +20,10 @@ class HeroCard extends StatelessWidget {
             fit: StackFit.expand,
             children: [
               HeroImage(image: hero?.thumbnail),
-              HeroName(name: hero?.name ?? '')
+              Container(
+                child: HeroName(name: hero?.name ?? ''),
+                margin: const EdgeInsets.all(30),
+              )
             ]));
   }
 }

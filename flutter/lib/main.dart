@@ -16,11 +16,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-        home: Scaffold(
-      body: Directionality(
-        textDirection: TextDirection.ltr,
-        child: Heroes(),
-      ),
+        home: Directionality(
+      textDirection: TextDirection.ltr,
+      child: Heroes(),
     ));
   }
 }

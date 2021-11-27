@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:marvel_heroes/models/heroes_container.dart';
 import 'package:marvel_heroes/widgets/hero/hero_card.dart';
-import 'package:marvel_heroes/widgets/hero/hero_details.dart';
+import 'package:marvel_heroes/pages/hero_details.dart';
 import 'package:marvel_heroes/widgets/triagnle_view.dart';
 import 'package:marvel_heroes/models/hero.dart' as hero_model;
 
