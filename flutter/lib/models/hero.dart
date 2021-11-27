@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 class Hero {
+  final int id;
   final String name;
-  final String avatar;
   final Color color;
   final String thumbnail;
   final String description;
 
   Hero(
-      {this.name = '',
-      this.avatar = '',
+      {this.id = 0,
+      this.name = '',
       this.thumbnail = '',
       this.description = '',
       this.color = Colors.white});
