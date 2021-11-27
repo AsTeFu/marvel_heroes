@@ -11,7 +11,7 @@ class HeroImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return FittedBox(
       fit: BoxFit.cover,
-      child: Image.asset(image ?? ''),
+      child: Image.network(image ?? ''),
     );
   }
 }

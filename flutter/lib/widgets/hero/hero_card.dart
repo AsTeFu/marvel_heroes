@@ -19,7 +19,7 @@ class HeroCard extends StatelessWidget {
             alignment: Alignment.bottomLeft,
             fit: StackFit.expand,
             children: [
-              HeroImage(image: hero?.avatar),
+              HeroImage(image: hero?.thumbnail),
               HeroName(name: hero?.name ?? '')
             ]));
   }

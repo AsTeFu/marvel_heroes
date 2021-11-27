@@ -4,6 +4,11 @@ class Hero {
   final String name;
   final String avatar;
   final Color color;
+  final String thumbnail;
 
-  Hero({this.name = '', this.avatar = '', this.color = Colors.white});
+  Hero(
+      {this.name = '',
+      this.avatar = '',
+      this.thumbnail = '',
+      this.color = Colors.white});
 }
