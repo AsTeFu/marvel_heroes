@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:marvel_heroes/pages/heroes.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
   runApp(const MyApp());
 }

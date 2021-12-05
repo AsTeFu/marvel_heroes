@@ -8,9 +8,9 @@ class Hero {
   final String description;
 
   Hero(
-      {this.id = 0,
-      this.name = '',
-      this.thumbnail = '',
+      {required this.id,
+      required this.name,
+      required this.thumbnail,
       this.description = '',
       this.color = Colors.white});
 }

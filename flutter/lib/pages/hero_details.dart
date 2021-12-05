@@ -7,7 +7,6 @@ import 'package:marvel_heroes/widgets/hero/hero_image.dart';
 import 'package:marvel_heroes/widgets/hero/hero_name.dart';
 import '../widgets/utils/back_button.dart' as utils;
 
-
 class HeroDetails extends StatelessWidget {
   final hero_model.Hero? hero;
   final int index;
@@ -20,7 +19,9 @@ class HeroDetails extends StatelessWidget {
     return Hero(
       tag: 'hero-$index',
       child: Stack(fit: StackFit.expand, children: [
-        HeroImage(image: hero?.thumbnail),
+        HeroImage(
+          source: hero?.thumbnail ?? '',
+        ),
         const utils.BackButton(),
         Container(
           margin: const EdgeInsets.all(30),

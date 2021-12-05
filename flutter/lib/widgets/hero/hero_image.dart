@@ -1,17 +1,20 @@
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/hero.dart' as hero_model;
 
 class HeroImage extends StatelessWidget {
-  final String? image;
+  final String source;
 
-  const HeroImage({Key? key, this.image}) : super(key: key);
+  const HeroImage({Key? key, required this.source}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return FittedBox(
       fit: BoxFit.cover,
-      child: Image.network(image ?? ''),
+      child: CachedNetworkImage(
+        imageUrl: source,
+      ),
     );
   }
 }
