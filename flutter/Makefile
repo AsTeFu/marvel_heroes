@@ -5,3 +5,6 @@ build:
 
 install:
 	flutter install
+
+generate_database:
+	flutter packages pub run build_runner watch

@@ -1,8 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:marvel_heroes/api/heroes_api.dart';
+import 'package:marvel_heroes/states/heroes_cubit.dart';
 
 import 'package:marvel_heroes/widgets/hero/hero_card.dart';
 import 'package:marvel_heroes/pages/hero_details.dart';
@@ -21,19 +22,6 @@ class HeroPageView extends StatefulWidget {
 class _HeroPageViewState extends State<HeroPageView> {
   final controller = PageController(viewportFraction: 0.85);
 
-  List<hero_model.Hero> heroes = List.empty();
-  var heroIds = [
-    1009268,
-    1009368,
-    1009220,
-    1009282,
-    1011010,
-    1009664,
-    1009351,
-    1009189
-  ];
-  bool loading = true;
-
   double page = 0;
   int lastIndex = 0;
 
@@ -43,14 +31,6 @@ class _HeroPageViewState extends State<HeroPageView> {
   void initState() {
     super.initState();
     controller.addListener(onScroll);
-
-    HeroesApi api = HeroesApi();
-    api.getHeroes(heroIds).then((values) {
-      setState(() {
-        heroes = values;
-        loading = false;
-      });
-    });
   }
 
   @override
@@ -84,7 +64,7 @@ class _HeroPageViewState extends State<HeroPageView> {
             HeroDetails(hero: hero, index: index)));
   }
 
-  Widget _renderHero(BuildContext context, int index) {
+  Widget _renderHero(List<hero_model.Hero> heroes, int index) {
     var value = (index.toDouble() - page).abs();
     var hero = heroes[index];
 
@@ -102,29 +82,31 @@ class _HeroPageViewState extends State<HeroPageView> {
 
   @override
   Widget build(BuildContext context) {
-    if (loading) {
-      return const Loader();
-    }
+    return BlocBuilder<HeroesCubit, HeroState>(builder: (context, state) {
+      if (state.loading) {
+        return const Loader();
+      }
 
-    if (heroes.isEmpty) {
-      return const NoDataPlaceholder();
-    }
+      if (state.heroes.isEmpty) {
+        return const NoDataPlaceholder();
+      }
 
-    var prevHero = heroes[lastIndex];
-    var currHero = heroes[page.abs().ceil() % heroes.length];
+      var prevHero = state.heroes[lastIndex];
+      var currHero = state.heroes[page.abs().ceil() % state.heroes.length];
 
-    return Stack(children: [
-      _renderBackground(prevHero, currHero),
-      Container(
-          padding: const EdgeInsets.fromLTRB(0, 24, 0, 48),
-          child: PageView.builder(
-              controller: controller,
-              physics: const BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              pageSnapping: true,
-              padEnds: true,
-              itemCount: heroes.length,
-              itemBuilder: _renderHero))
-    ]);
+      return Stack(children: [
+        _renderBackground(prevHero, currHero),
+        Container(
+            padding: const EdgeInsets.fromLTRB(0, 24, 0, 48),
+            child: PageView.builder(
+                controller: controller,
+                physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                pageSnapping: true,
+                padEnds: true,
+                itemCount: state.heroes.length,
+                itemBuilder: (_, index) => _renderHero(state.heroes, index)))
+      ]);
+    });
   }
 }
