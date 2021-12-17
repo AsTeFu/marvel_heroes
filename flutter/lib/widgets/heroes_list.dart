@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:marvel_heroes/states/heroes_cubit.dart';
+import 'package:marvel_heroes/cubits/heroes_cubit.dart';
 
 import 'package:marvel_heroes/widgets/hero/hero_card.dart';
 import 'package:marvel_heroes/pages/hero_details.dart';

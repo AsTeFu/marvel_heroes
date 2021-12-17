@@ -35,7 +35,8 @@ class HeroesApi {
     );
 
     fetcher = Fetcher(
-        baseUrl: urls.baseUrl + urls.apiVersion, interceptors: {interceptor});
+        baseUrl: '${urls.baseUrl}${urls.apiVersion}',
+        interceptors: {interceptor});
   }
 
   String _generateMd5(String input) {
@@ -43,7 +44,7 @@ class HeroesApi {
   }
 
   Future<models.Hero> getHero(int heroId) async {
-    dynamic response = await fetcher.get(urls.heroesUrl + '/$heroId');
+    dynamic response = await fetcher.get('${urls.heroesUrl}/$heroId');
     var heroResponse = response['data']['results'][0];
 
     models.Hero hero = models.Hero(
@@ -54,7 +55,7 @@ class HeroesApi {
       color: colors.heroColors[heroResponse['name']] ?? Colors.pink,
     );
 
-    return Future(() => hero);
+    return hero;
   }
 
   Future<List<models.Hero>> getHeroes(List<int> heroIds) async {
