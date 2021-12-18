@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -31,6 +32,20 @@ class _HeroPageViewState extends State<HeroPageView> {
   void initState() {
     super.initState();
     controller.addListener(onScroll);
+
+    FirebaseMessaging.instance.getInitialMessage();
+
+    FirebaseMessaging.onMessageOpenedApp.listen((event) {
+      var heroes = BlocProvider.of<HeroesCubit>(context).state.heroes;
+      final int heroId = int.parse(event.data['heroId']);
+      var index = heroes.map((hero) => hero.id).toList().indexOf(heroId);
+
+      controller.jumpToPage(index);
+
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (BuildContext context) =>
+              HeroDetails(hero: heroes[index], index: index)));
+    });
   }
 
   @override
